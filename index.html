@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Quiz</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #121212; /* Dark background color */
+        color: #fff; /* White text color */
+        padding: 20px;
+    }
+    .quiz-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #333; /* Dark gray background color for quiz container */
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .question {
+        margin-bottom: 20px;
+    }
+    h2 {
+        color: #2196F3; /* Dark blue color for question headers */
+    }
+    input[type="checkbox"], input[type="radio"] {
+        margin-right: 5px;
+    }
+    button {
+        background-color: #2196F3; /* Dark blue color for buttons */
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0d8af5; /* Darker shade of blue on hover */
+    }
+    #answer {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 5px;
+        background-color: #0a4e8e; /* Dark blue background color for feedback */
+        color: #fff;
+        font-weight: bold;
+    }
+    #answer img {
+        display: block;
+        max-width: 100%;
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="question">
+        <h2>Question 1: Which of the following are colors of the rainbow? (Select all that apply)</h2>
+        <input type="checkbox" name="q1" value="a"> <span style="color: #4CAF50;">a) Red</span><br>
+        <input type="checkbox" name="q1" value="b"> <span style="color: #4CAF50;">b) Green</span><br>
+        <input type="checkbox" name="q1" value="c"> <span style="color: #4CAF50;">c) Yellow</span><br>
+        <input type="checkbox" name="q1" value="d"> <span style="color: #4CAF50;">d) Black</span><br>
+    </div>
+    <button onclick="checkAnswer()">Submit</button>
+    <div id="answer"></div>
+</div>
+
+<script>
+function checkAnswer() {
+    var correctAnswers = ["a", "b", "c"]; // Array of correct answers for question 1
+    var selectedAnswers = Array.from(document.querySelectorAll('input[name="q1"]:checked')).map(el => el.value);
+
+    var correct = true;
+    correctAnswers.forEach(answer => {
+        if (!selectedAnswers.includes(answer)) {
+            correct = false;
+        }
+    });
+
+    if (correct && correctAnswers.length === selectedAnswers.length) {
+        document.getElementById('answer').innerHTML = "Correct!";
+        document.getElementById('answer').style.backgroundColor = "#4CAF50"; // Green background color for correct feedback
+        document.getElementById('answer').innerHTML += "<img src='correct.png' alt='Correct answer'>";
+    } else {
+        document.getElementById('answer').innerHTML = "Incorrect. The correct answers are a) Red, b) Green, and c) Yellow.";
+        document.getElementById('answer').style.backgroundColor = "#f44336"; // Red background color for incorrect feedback
+        document.getElementById('answer').innerHTML += "<img src='incorrect.png' alt='Incorrect answer'>";
+    }
+}
+</script>
+
+</body>
+</html>
